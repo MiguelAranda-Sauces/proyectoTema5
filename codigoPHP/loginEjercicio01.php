@@ -1,0 +1,25 @@
+<?php
+
+/*
+ * @autor: Miguel Angel Aranda Garcia <miguela.aragar@educa.jcyl.es>
+ * @version 1.0
+ * @since 24/11/2020 1.0:
+ */
+
+if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW'])) {
+        header("WWW-Authenticate: Basic realm=\"Private Area\"");
+        header("HTTP/1.0 401 Unauthorized");
+        print "Error al logear";
+        exit;
+    } else {
+        if (($_SERVER['PHP_AUTH_USER'] == 'admin') && (hash('sha256', $_SERVER['PHP_AUTH_PW']) == '4dd09b8f659e27847f94782920fb7e41b2c5afbd7f419a4a3ed8ab7aa5b7f944')) {
+             header("Location: ejercicio01.php");
+        } else {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+             print "Error al logear";
+            exit;
+        }
+    }
+
+?>
