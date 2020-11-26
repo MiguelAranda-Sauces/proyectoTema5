@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Detalles Ejercicio 01</title>
+        <title>Ejercicio 00</title>
         <style type="text/css">
             table{
                 position: relative;
@@ -11,40 +11,40 @@
                 width: 70% !important; 
                 margin-top: 1%;
             }
-            
+
             td,th{
                 border: 1px solid black;
                 padding: 0px;
-               
+
             }
-            
+
             th{
                 text-align:center;
                 padding: 0px;
                 background-color: #ccf !important;
             }
-            
+
             table{
                 border:1px solid black;
             }
-            
+
             td:nth-of-type(1){
                 background-color: #ccf;
             }
-            
+
             td:nth-of-type(2){
                 background-color: #ddd;
             }
-            
+
             h2{
                 text-align: center;
             }
-            
+
         </style>
 
     </head>
     <body>
-        
+
         <?php
         /*
          * @autor: Miguel Angel Aranda Garcia <miguela.aragar@educa.jcyl.es>
@@ -73,62 +73,8 @@
                 ?>
             </tbody>
         </table>
-         <h2>$_ENV</h2>
-         <?php
-        if (!empty($_ENV)) {
-            ?>
-        
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="2">$_ENV</th>
-                </tr>
-                <tr>
-                    <th>Variable</th>
-                    <th>Valor</th>
-                </tr>
-                <?php
-                foreach ($_ENV as $variable => $valor) {
-                    echo("<tr>");
-                    echo("<td>" . $variable . "</td>");
-                    echo("<td>" . $valor . "</td>");
-                    echo("</tr>");
-                }
-                ?>
-            </tbody>
-        </table>
+        <h2>$_SESSION</h2>
         <?php
-        }
-        
-        ?>
-          <h2>$_FILES</h2>
-         <?php
-        if (!empty($_FILES)) {
-            ?>
-            <table>
-                <tbody>
-                    <tr>
-                        <th colspan="2">$_FILES</th>
-                    </tr>
-                    <tr>
-                        <th>Variable</th>
-                        <th>Valor</th>
-                    </tr>
-                    <?php
-                    foreach ($_FILES as $variable => $valor) {
-                        echo("<tr>");
-                        echo("<td>" . $variable . "</td>");
-                        echo("<td>" . $valor . "</td>");
-                        echo("</tr>");
-                    }
-                    ?>
-                </tbody>
-            </table>
-            <?php
-        }
-         ?>
-          <h2>$_SESSION</h2>
-         <?php
         if (!empty($_SESSION)) {
             ?>
             <table>
@@ -150,12 +96,12 @@
                     ?>
                 </tbody>
             </table>
-          
+
             <?php
         }
-         ?>
-          <h2>$_GET</h2>
-         <?php
+        ?>
+        <h2>$_GET</h2>
+        <?php
         if (!empty($_GET)) {
             ?>
             <table>
@@ -180,8 +126,8 @@
             <?php
         }
         ?>
-          <h2>$_POST</h2>
-         <?php
+        <h2>$_POST</h2>
+        <?php
         if (!empty($_POST)) {
             ?>
             <table>
@@ -205,9 +151,9 @@
             </table>
             <?php
         }
-         ?>
-          <h2>$_COOKIE</h2>
-         <?php
+        ?>
+        <h2>$_COOKIE</h2>
+        <?php
         if (!empty($_COOKIE)) {
             ?>
             <table>
@@ -232,8 +178,8 @@
             <?php
         }
         ?>
-          <h2>$_REQUEST</h2>
-         <?php
+        <h2>$_REQUEST</h2>
+        <?php
         if (!empty($_REQUEST)) {
             ?>
             <table>
