@@ -52,7 +52,6 @@
          * Ejericico Mostramos la variables super globales.
          */
         ?>
-        <a href="../proyectoTema5.html"><button>Volver</button></a>
         <table>
             <h2>$_SERVER</h2>
             <tbody>

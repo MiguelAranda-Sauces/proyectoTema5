@@ -2,14 +2,14 @@
 
 /*
  * @autor: Miguel Angel Aranda Garcia <miguela.aragar@educa.jcyl.es>
- * @version 1.0
- * @since 24/11/2020 1.0:
+ * @version 1.1
+ * @since 24/11/2020 1.0: Creamos el login mediante $_SERVER y Acceso a la base de datos 1.1 Eliminación de comprobación si esta vacio $_SERVER usuario y password si pulsamos cancelar devuelve error
  */
 
-if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW'])) {
-    header("WWW-Authenticate: Basic realm=\"Private Area\"");
-    header("HTTP/1.0 401 Unauthorized");
-    print "Error al logear";
+if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])) {
+    header('WWW-Authenticate: Basic realm=\"Private Area\"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'Usuario o password incorrectos';
     exit;
 } else {
     require_once "../config/conexionBDPDO.php"; //incluimos la conexión a la BD
@@ -26,11 +26,16 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) || empt
 
         $consultaLogin->execute(); //Ejecutamos la consulta preparada
         $oUsuario = $consultaLogin->fetchObject(); //creamos el objeto PDO de usuario
-        
-        if ($oUsuario->CodUsuario == $usuarioInsertUsuario && $oUsuario->Password == hash("sha256", $usuarioInsertUsuario.$passInsertUsuario)) {
-            header("Location: ejercicio02.php");
+
+        if ($oUsuario->CodUsuario == $usuarioInsertUsuario && $oUsuario->Password == hash("sha256", $usuarioInsertUsuario . $passInsertUsuario)) {//concatenamos el usuario y la password
+            session_start(); //iniciamos la sesión
+            $_SESSION['usuario'] = $usuarioInsertUsuario; //asignamos el valor del usuario al objero de sesion
+            header("Location: ejercicio02.php"); //redirigimos
         } else {
-            echo "Error el usuario o la password no son correctos";
+            header('WWW-Authenticate: Basic realm=\"Private Area\"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Usuario o password incorrectos';
+            exit;
         }
     } catch (PDOException $miExcepcionPDO) {
         echo "<div class='contenedorError'>";

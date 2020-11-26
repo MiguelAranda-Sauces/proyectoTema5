@@ -13,6 +13,7 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) || empt
         </head>
         <body>
             <h1>Miguel Angel Aranda Garcia</h1>
+            <p><?php echo $_COOKIE['idioma']; ?></p>
             <a href="../proyectoTema5.html"><button>Volver</button></a>
             <a href="ejercicio00.php"><button>Detalles Servidor</button></a>
 

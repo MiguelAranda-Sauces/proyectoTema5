@@ -21,25 +21,15 @@
   exit;
   }
   } */
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])) {
-        header("WWW-Authenticate: Basic realm=\"Private Area\"");
-        header("HTTP/1.0 401 Unauthorized");
-        print "Error al logear";
-        exit;
-    } else {
-        if (($_SERVER['PHP_AUTH_USER'] == 'admin') && (hash('sha256', $_SERVER['PHP_AUTH_PW']) == '4dd09b8f659e27847f94782920fb7e41b2c5afbd7f419a4a3ed8ab7aa5b7f944')) {
-            $_SESSION['usuario'] = "patata";
-            
-        } else {
-            header("WWW-Authenticate: Basic realm=\"Private Area\"");
-            header("HTTP/1.0 401 Unauthorized");
-            print "Error al logear";
-            exit;
-        }
+if (($_SERVER['PHP_AUTH_USER'] == 'admin') && (hash('sha256', $_SERVER['PHP_AUTH_PW']) == '4dd09b8f659e27847f94782920fb7e41b2c5afbd7f419a4a3ed8ab7aa5b7f944')) { //comprobamo a logeado con admin paso
+    if (!isset($_COOKIE['idioma'])) { //si no esta creada la cookie de idioma la iniciamos
+        setcookie('idioma', "ES");
     }
+    header("Location: ejercicio01.php"); //redirigimos a ejercicio 1
 } else {
-    header("Location: ejercicio01.php");
+    header('WWW-Authenticate: Basic realm=\"Private Area\"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'Usuario o password incorrectos';
+    exit;
 }
 ?>
